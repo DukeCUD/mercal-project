@@ -1,0 +1,42 @@
+.HomeUpperPart{
+    /*background-color: red;*/
+    padding: 165px;
+}
+.HomeUpperPart{
+    text-align: center;
+    background: linear-gradient(to bottom, #5f3dc4, #91a7ff);
+    color: white;
+}
+.h1-0{
+    font-family: "JetBrains Mono";
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.p-0{
+    font-family: "JetBrains Mono";
+    margin-bottom: 20px;
+
+}
+.bth{
+    margin: 20px;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+
+}
+.bth-0{
+    background-color: black;
+    color: white;
+}
+.bth-0:hover,bth-0:active{
+    background-color: #343a40;
+}
+.bth-1{
+    background-color: white;
+    color: black;
+}
+.bth-1:hover,bth-0:active{
+    background-color: #ced4da;
+}
