@@ -1,0 +1,76 @@
+.container {
+    background-color: #f1f3f5;
+    display: flex; /* Enable flexbox layout */
+    height: 500px; /* Adjust height as needed */
+    margin-top: 96px;
+    font-family: "JetBrains Mono";
+}
+
+.image-overlay {
+    flex: 0 0 50%; /* Set image container to occupy 50% width */
+    background-image: none; /* Remove background image from this element */
+    position: relative;
+}
+
+.image-overlay img {
+    width: 100%; /* Ensure image fills the container */
+    height: 100%; /* Ensure image fills the container */
+    object-fit: cover; /* Ensure image covers the container */
+}
+
+.text-overlay {
+    line-height: 1.4;
+    flex: 1; /* Set text container to occupy remaining 50% width */
+    padding: 20px;
+    padding-left: 50px;
+    max-width: 500px;
+    display: flex; /* Enable flexbox for text alignment */
+    flex-direction: column; /* Arrange text content vertically */
+    justify-content: center; /* Center text content vertically */
+    align-items: flex-start; /* Align text content to the left */
+    color: black; /* Set text color */
+    border-left: 10px solid #91a7ff;
+}
+.container2 {
+    background-color: #f1f3f5;
+    display: flex; /* Enable flexbox layout */
+    height: 500px; /* Adjust height as needed */
+    margin: 96px 0;
+    font-family: "JetBrains Mono";
+}
+
+.image-overlay2 {
+    flex: 0 0 50%; /* Set image container to occupy 50% width */
+    background-image: none; /* Remove background image from this element */
+    position: relative;
+}
+
+.image-overlay2 img {
+    width: 85%; /* Ensure image fills the container */
+    height: 100%; /* Ensure image fills the container */
+    object-fit: cover; /* Ensure image covers the container */
+    border-radius: 100%;
+    padding-left: 50px;
+}
+
+.text-overlay2 {
+    line-height: 1.4;
+    flex: 1; /* Set text container to occupy remaining 50% width */
+    padding: 20px;
+    padding-left: 50px;
+    max-width: 5000px;
+    display: flex; /* Enable flexbox for text alignment */
+    flex-direction: column; /* Arrange text content vertically */
+    justify-content: center; /* Center text content vertically */
+    align-items: flex-start; /* Align text content to the left */
+    color: black; /* Set text color */
+    /*border-right: 10px solid #91a7ff;*/
+
+}
+i{
+    margin: 10px 20px;
+}
+.author{
+    border-left: 5px solid #91a7ff;
+    padding-left: 20px;
+}

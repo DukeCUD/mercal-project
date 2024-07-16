@@ -1,9 +1,9 @@
 
-const BookPahe =()=>{
+const BookPage =()=>{
     return(
         <div>
             Book page
         </div>
     )
 }
-export default BookPahe
+export default BookPage

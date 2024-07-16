@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 
 const items = [
     {
-        label: <NavLink to="/book">Book</NavLink>,
+        label: <NavLink to="/book">Books Management</NavLink>,
         key: 'nav1', // Add unique keys for top-level items
     },
     {

@@ -2,14 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import ErrorPage from "./page/error.jsx";
-import HomeUpperPart from "./page/homePage/HomeUpperPart";
-import "./main.css"
 import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
 import LoginPage from "./page/login.jsx";
-import BookPahe from "./page/book.user.jsx";
+import BookPage from "./page/book.user.jsx";
+import RegisterPage from "./page/register.jsx";
+import SettingPage from "./page/setting.jsx";
+import Home from "./page/Home.jsx";
 
 const router = createBrowserRouter([
     {
@@ -19,15 +20,24 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomeUpperPart />,
+                element: <Home />,
             },
             {
-                path: "/users",
+                path: "/login",
                 element: <LoginPage />,
             },
             {
-                path: "/books",
-                element: <BookPahe/>,
+                path: "/register",
+                element: <RegisterPage />,
+            },
+            {
+                path: "/book",
+                element: <BookPage/>,
+            },
+
+            {
+                path: "/setting",
+                element: <SettingPage/>,
             },
         ],
 
