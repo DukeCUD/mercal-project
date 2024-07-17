@@ -6,11 +6,12 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import LoginPage from "./page/login.jsx";
-import BookPage from "./page/book.user.jsx";
-import RegisterPage from "./page/register.jsx";
+import LoginPage from "./page/loginPage/login.jsx";
+import SignUpPage from "./page/Register/register.jsx";
 import SettingPage from "./page/setting.jsx";
 import Home from "./page/Home.jsx";
+import Update from "./page/update.jsx";
+import BookManage from "./page/book.manage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -27,14 +28,17 @@ const router = createBrowserRouter([
                 element: <LoginPage />,
             },
             {
-                path: "/register",
-                element: <RegisterPage />,
+                path: "/sign-up",
+                element: <SignUpPage />,
             },
             {
-                path: "/book",
-                element: <BookPage/>,
+                path: "/book.manage",
+                element: <BookManage/>,
             },
-
+            {
+                path: "/update",
+                element: <Update/>,
+            },
             {
                 path: "/setting",
                 element: <SettingPage/>,

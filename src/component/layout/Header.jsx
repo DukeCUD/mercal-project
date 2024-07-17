@@ -6,11 +6,11 @@ import {NavLink} from "react-router-dom";
 
 const items = [
     {
-        label: <NavLink to="/book">Books Management</NavLink>,
+        label: <NavLink to="/book.manage">Books Manage</NavLink>,
         key: 'nav1', // Add unique keys for top-level items
     },
     {
-        label: 'Navigation Two',
+        label: <NavLink to="/Update">Update</NavLink>,
         key: 'nav2', // Add unique keys for top-level items
     },
     {
@@ -61,12 +61,12 @@ const items = [
                 key: 'setting:5',
             },
             {
-                label: <NavLink to="/login">Sign In</NavLink>,
+                label: <NavLink to="/login">Log In</NavLink>,
                 key: 'setting:3',
             },
 
             {
-                label: <NavLink to="/register">Create On</NavLink>,
+                label: <NavLink to="/sign-up">Sign Up</NavLink>,
                 key: 'setting:4',
             },
 
@@ -87,7 +87,7 @@ const Header = () => {
 
     return (
         <>
-            <div style={{display: "grid",  gridTemplateColumns:" 1fr 3fr" ,alignItems: "center",gridAutoFlow: "column", padding: "0px 30px",height:"70px"}}>
+            <div style={{display: "grid",  gridTemplateColumns:" 1fr 20fr" ,alignItems: "center",gridAutoFlow: "column", padding: "0px 30px",height:"70px"}}>
                 <NavLink to="/./"><img src={ViteLogo} style={{height: "50px", width: "50px",}}></img></NavLink>
                 <Menu
                     onClick={onClick}

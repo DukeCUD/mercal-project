@@ -1,18 +1,17 @@
-.HomeUpperPart{
-    /*background-color: red;*/
+
+.HomeBellowPart{
     padding: 165px;
-}
-.HomeUpperPart{
     text-align: center;
-    background: linear-gradient(to bottom, #5f3dc4, #91a7ff);
+    background: linear-gradient(to bottom, #91a7ff , #5f3dc4);
     color: white;
+    margin-bottom: 96px;
 }
-.h1-0{
+.h1-1{
     font-family: "JetBrains Mono";
     margin-bottom: 20px;
     font-weight: bold;
 }
-.p-0{
+.p-1{
     font-family: "JetBrains Mono";
     margin-bottom: 20px;
 
@@ -26,23 +25,10 @@
     border: none;
 
 }
-.bth-0{
+.bth-3{
     background-color: black;
     color: white;
 }
-.bth-0:hover,bth-0:active{
+.bth-3:hover,bth-0:active{
     background-color: #343a40;
-}
-.bth-1{
-    background-color: white;
-    color: black;
-}
-.bth-1:hover,bth-0:active{
-    background-color: #ced4da;
-}
-.link-1{
-    text-decoration: none;
-}
-.link-1:active{
-    color: black;
 }
