@@ -71,7 +71,10 @@ const data = [
         tags: ['cool', 'teacher'],
     },
 ];
-const BookManage=()=>{
-    return(<Table columns={columns} dataSource={data} />)
+const BookTable=()=>{
+    return(
+        <Table
+
+            columns={columns} dataSource={data} />)
 }
-export default BookManage
+export default BookTable
