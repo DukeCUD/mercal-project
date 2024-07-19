@@ -1,17 +1,21 @@
 import {Input, Button, notification} from 'antd';
 import {useState} from "react";
 import {createUserAPI} from "../../service/api.service.js";
-import BookTable from "./BookTable.jsx";
-
-const BookManage=()=>{
+import { Modal } from 'antd';
+import {Typography} from "antd";
+const { Title } = Typography;
+const BookManage=(props)=>{
+    const {loadAPI}=props
 const [fullName,setFullName]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const [phone,setPhone]=useState("")
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const handleClick=async ()=>{
+
         const res = await
-        // Cụm async await có tác dun nhằm hứng kết quả sau khi axios.post()
-        createUserAPI(fullName,email,password,phone)
+            // Cụm async await có tác dun nhằm hứng kết quả sau khi axios.post()
+            createUserAPI(fullName,email,password,phone)
         if(res.data) {
             notification.success(
                 {
@@ -19,6 +23,9 @@ const [fullName,setFullName]=useState("")
                     description: "User created successfully!",
                 }
             )
+            resetAndCloseModal()
+            await loadAPI()
+
         }
         else{
             notification.error(
@@ -32,45 +39,60 @@ const [fullName,setFullName]=useState("")
         //Truy cập vào sâu trong phần tử của data chính là các biến fullName, email,...
     }
 
+    const resetAndCloseModal=()=>{
+        setIsModalOpen(false);
+         setFullName("")
+         setEmail("")
+         setPassword("")
+         setPhone("")
+    }
+
+
+
     return(
-        <div style={{
-            margin:"50px 100px"
-        }}>
-            <div style={{marginBottom: "50px"}}>
-                <div style={{margin: "20px 0"}}>
-                    <p>Full name</p>
-                    <Input placeholder="Basic usage"
-                           value={fullName}
-                           onChange={(event) => setFullName(event.target.value)}
-                    />
-                </div>
-                <div style={{margin: "20px 0"}}>
-                    <p>Email</p>
-                    <Input
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        placeholder="Basic usage"/>
-                </div>
-                <div style={{margin: "20px 0"}}>
-                    <p>Password</p>
-                    <Input.Password
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="input password"/>
-                </div>
-                <div style={{margin: "20px 0"}}>
-                    <p>Phone number</p>
-                    <Input
-                        value={phone}
-                        onChange={(event) => setPhone(event.target.value)}
-                        placeholder="Basic usage"/>
-                </div>
-                <Button type="primary" onClick={() => handleClick()}>
+
+
+            <div style={{display:"flex",justifyContent: 'space-between',alignItems:"center"}}>
+                <Title>Books Manage</Title>
+                <Button  type="primary" onClick={() => setIsModalOpen(true)}>
                     Create User
                 </Button>
+                <Modal maskClosable={false} title="Create User"  okText="Create" open={isModalOpen} onOk={handleClick} onCancel={resetAndCloseModal}>
+                    <div style={{marginBottom: "50px"}}>
+                        <div style={{margin: "20px 0"}}>
+                            <p>Full name</p>
+                            <Input
+                                   value={fullName}
+                                   onChange={(event) => setFullName(event.target.value)}
+                            />
+                        </div>
+                        <div style={{margin: "20px 0"}}>
+                            <p>Email</p>
+                            <Input
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
+                                />
+                        </div>
+                        <div style={{margin: "20px 0"}}>
+                            <p>Password</p>
+                            <Input.Password
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                               />
+                        </div>
+                        <div style={{margin: "20px 0"}}>
+                            <p>Phone number</p>
+                            <Input
+                                value={phone}
+                                onChange={(event) => setPhone(event.target.value)}
+                                />
+                        </div>
+
+                    </div>
+                </Modal>
+
             </div>
-            <BookTable/>
-        </div>
+
     )
 }
 export default BookManage

@@ -11,7 +11,7 @@ import SignUpPage from "./page/Register/register.jsx";
 import SettingPage from "./page/setting.jsx";
 import Home from "./page/Home.jsx";
 import Update from "./page/update.jsx";
-import BookManage from "./page/bookManage/book.manage.jsx";
+import Book from "./page/book.jsx";
 
 const router = createBrowserRouter([
     {
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/book.manage",
-                element: <BookManage/>,
+                element: <Book/>,
             },
             {
                 path: "/update",

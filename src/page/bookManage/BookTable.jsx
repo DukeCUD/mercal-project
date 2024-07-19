@@ -1,15 +1,10 @@
 
 import {  Table } from 'antd';
-import {fetchAllAPI} from "../../service/api.service.js";
-import {useEffect, useState} from "react";
 
 
-const BookTable=()=>{
-    const [dataUser,setDataUser]=useState([])
-    useEffect(() => {
-        loadAPI(),[]
 
-    }, []);
+const BookTable=(props)=>{
+    const {dataUser}=props
     const columns = [
         {
             title: 'Name',
@@ -29,10 +24,7 @@ const BookTable=()=>{
         },
 
     ];
-    const loadAPI=async()=>{
-        const res =await fetchAllAPI()
-        setDataUser(res.data)
-    }
+
     return(
         <Table
             columns={columns} dataSource={dataUser} rowKey={"_id"} />)
