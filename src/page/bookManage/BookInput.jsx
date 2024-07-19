@@ -1,17 +1,34 @@
-import { Input ,Button } from 'antd';
+import {Input, Button, notification} from 'antd';
 import {useState} from "react";
-import axios from "axios";
+import {createUserAPI} from "../../service/api.service.js";
+
 const BookInput=()=>{
 const [fullName,setFullName]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const [phone,setPhone]=useState("")
-    const handleClick=()=>{
-        const URL_BACKEND="http://localhost:8080/api/v1/user"
-        const data ={fullName,email,password,phone}
-        axios.post(URL_BACKEND,data)
-        // cấu trúc tạo mới dữ liê axios.post(URL backend, data)
-        console.log(">> check data",fullName,email,password,phone)
+    const handleClick=async ()=>{
+        const res = await
+        // Cụm async await có tác dun nhằm hứng kết quả sau khi axios.post()
+        createUserAPI(fullName,email,password,phone)
+        if(res.data) {
+            notification.success(
+                {
+                    message: "Create User",
+                    description: "User created successfully!",
+                }
+            )
+        }
+        else{
+            notification.error(
+                {
+                    message: "Create User",
+                    description: JSON.stringify(res.message),
+                }
+            )
+        }
+        console.log(">> check respon",res.data)
+        //Truy cập vào sâu trong phần tử của data chính là các biến fullName, email,...
     }
 
     return(
