@@ -17,7 +17,9 @@ const Book =()=>{
     return (
         <div style={{margin:"50px 100px",}}>
             <BookManage loadAPI={loadAPI}/>
-            <BookTable dataUser={dataUser}/>
+            <BookTable
+                loadAPI={loadAPI}
+                dataUser={dataUser}/>
         </div>
     )
 }

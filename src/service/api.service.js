@@ -6,13 +6,15 @@ const createUserAPI=(fullName,email,password,phone)=>{
     return axios.post(URL_BACKEND,data) //kê't quả của function là axios.post(URL backend, data)
     // cấu trúc tạo mới dữ liê axios.post(URL backend, data)
 }
-// const updateUserAPI=()=>{
-//
-// }
+const updateUserAPI=(fullName,_id,email,phone)=>{
+    const URL_BACKEND="api/v1/user"
+    const data ={fullName,_id,email,phone}
+    return axios.put(URL_BACKEND,data)
+}
 const fetchAllAPI=()=>{
     const URL_BACKEND="api/v1/user"
     return axios.get(URL_BACKEND)   //Đối với method GET chỉ cần truyền URL
 }
 export {
-    createUserAPI,fetchAllAPI
+    createUserAPI,fetchAllAPI,updateUserAPI
 }

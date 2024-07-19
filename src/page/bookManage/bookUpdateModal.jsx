@@ -1,9 +1,9 @@
 import {Input, Modal, notification} from "antd";
 import {useEffect, useState} from "react";
-import {createUserAPI} from "../../service/api.service.js";
+import { updateUserAPI} from "../../service/api.service.js";
 
 const UpdateUserModal =(props)=>{
-    const {isModalOpenUpdate,setIsModalOpenUpdate,dataUpdate,setDataUpdate}=props
+    const {isModalOpenUpdate,setIsModalOpenUpdate,dataUpdate,setDataUpdate,loadAPI}=props
     const [fullName,setFullName]=useState("")
     const [email,setEmail]=useState("")
     const [phone,setPhone]=useState("")
@@ -16,13 +16,14 @@ const UpdateUserModal =(props)=>{
             setID(dataUpdate._id)
             setEmail(dataUpdate.email)
             setPhone(dataUpdate.phone)
+
         }
     }, [dataUpdate]);
     const handleClick=async ()=>{
 
         const res = await
             // Cụm async await có tác dun nhằm hứng kết quả sau khi axios.post()
-            createUserAPI(fullName,email,password,phone)
+            updateUserAPI(fullName,_id,email,phone)
         if(res.data) {
             notification.success(
                 {
@@ -31,7 +32,7 @@ const UpdateUserModal =(props)=>{
                 }
             )
             resetAndCloseModal()
-            // await loadAPI()
+            await loadAPI()
 
         }
         else{

@@ -6,8 +6,9 @@ import {useState} from "react";
 
 
 
+
 const BookTable=(props)=>{
-    const {dataUser}=props
+    const {dataUser,loadAPI}=props
     const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
     const [dataUpdate,setDataUpdate]=useState(null)
     const columns = [
@@ -59,6 +60,7 @@ const BookTable=(props)=>{
                 setIsModalOpenUpdate={setIsModalOpenUpdate}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
+                loadAPI={loadAPI}
             />
         </div>
     )
