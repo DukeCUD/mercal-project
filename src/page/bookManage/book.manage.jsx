@@ -7,6 +7,7 @@ const { Title } = Typography;
 const BookManage=(props)=>{
     const {loadAPI}=props
 const [fullName,setFullName]=useState("")
+
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
     const [phone,setPhone]=useState("")
@@ -35,7 +36,7 @@ const [fullName,setFullName]=useState("")
                 }
             )
         }
-        console.log(">> check respon",res.data)
+        // console.log(">> check respon",res.data)
         //Truy cập vào sâu trong phần tử của data chính là các biến fullName, email,...
     }
 
