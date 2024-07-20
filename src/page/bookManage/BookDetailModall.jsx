@@ -9,7 +9,7 @@ const BookDetailModall=(props)=>{
     return(
 
         <>
-            <Drawer title="User Information" open={isDetailOpen} onClose={()=> {setDataDetail(null);setIsDataDetail(false)}}>
+            <Drawer title="User Detail" open={isDetailOpen} onClose={()=> {setDataDetail(null);setIsDataDetail(false)}}>
                 {dataDetail?
                     <>
                         <div style={{margin: "20px 0"}}>
