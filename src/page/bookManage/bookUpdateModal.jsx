@@ -74,13 +74,7 @@ const UpdateUserModal =(props)=>{
                             disabled
                         />
                     </div>
-                    <div style={{margin: "20px 0"}}>
-                        <p>Email</p>
-                        <Input
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                        />
-                    </div>
+
                     <div style={{margin: "20px 0"}}>
                         <p>Phone number</p>
                         <Input

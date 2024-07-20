@@ -3,14 +3,17 @@ import {  Table } from 'antd';
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import UpdateUserModal from "./bookUpdateModal.jsx";
 import {useState} from "react";
-
-
+import BookDetailModall from "./BookDetailModall.jsx";
 
 
 const BookTable=(props)=>{
     const {dataUser,loadAPI}=props
     const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
     const [dataUpdate,setDataUpdate]=useState(null)
+
+    const [dataDetail,setDataDetail]=useState(null)
+    const [isDetailOpen,setIsDataDetail]=useState(false)
+
     const columns = [
         {
             title: 'Name',
@@ -21,10 +24,18 @@ const BookTable=(props)=>{
             dataIndex: '_id',
             render: (_, record) => (
                 <>
-                    <a href="#">{record._id}</a>
+                    <a href="#" style={{cursor:"pointer"}}
+                       onClick={()=>{
+                        // console.log(">>check record",record)
+                        setDataDetail(record)
+                        setIsDataDetail(true)
+                        }}>
+                        {record._id}
+                    </a>
                 </>
             ),
         },
+
         {
             title: 'Email',
             dataIndex: 'email',
@@ -62,6 +73,15 @@ const BookTable=(props)=>{
                 setDataUpdate={setDataUpdate}
                 loadAPI={loadAPI}
             />
+            <BookDetailModall
+                dataDetail={dataDetail}
+            setDataDetail={setIsDataDetail}
+            isDetailOpen={isDetailOpen}
+            setIsDataDetail={setIsDataDetail}
+                loadAPI={loadAPI}
+
+            />
+
         </div>
     )
 }
