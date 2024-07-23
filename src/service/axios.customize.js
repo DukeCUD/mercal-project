@@ -3,7 +3,7 @@ import axios from "axios";
 // Set config defaults when creating the instance
 const instance = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL
-    // Truốc khi gửi request
+    // Trước khi gửi request
 });
 
 // Alter defaults after instance has been created
@@ -32,4 +32,5 @@ instance.interceptors.response.use(function (response) {
     if(error.response&&error.response.data) return error.response.data
     return Promise.reject(error);
 });
+
 export default instance

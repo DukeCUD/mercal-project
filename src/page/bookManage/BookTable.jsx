@@ -112,6 +112,7 @@ const BookTable=(props)=>{
                 loadAPI={loadAPI}
             />
             <BookDetailModall
+                loadAPI={loadAPI}
                 dataDetail={dataDetail}
             setDataDetail={setIsDataDetail}
             isDetailOpen={isDetailOpen}

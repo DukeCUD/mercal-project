@@ -1,6 +1,7 @@
 // import {useEffect, useState} from "react";
-import {Button, Drawer,} from 'antd';
+import {Button, Drawer, notification,} from 'antd';
 import {useState} from "react";
+import {handleUploadFile, updateUserAvatarAPI} from "../../service/api.service.js";
 const BookDetailModall=(props)=>{
     const [selectedFile, setSelectedFile] = useState(null)
     const [preview, setPreview] = useState(null)
@@ -8,9 +9,12 @@ const BookDetailModall=(props)=>{
     const {dataDetail,
         setDataDetail,
         isDetailOpen,
-        setIsDataDetail,}=props
+        setIsDataDetail,
+        loadAPI }=props
     const handleOnChangeFile=(e)=>{
         if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(null)
+            setPreview(null)
             return
         }
         const file=e.target.files[0]
@@ -19,8 +23,36 @@ const BookDetailModall=(props)=>{
             setPreview(URL.createObjectURL(file))
         }
     }
-    const handleUploadAvatar=()=>{
-        console.log(">>check file",selectedFile)
+    const handleUploadAvatar=async()=> {
+        const resUpload = await handleUploadFile(selectedFile,"avatar")
+        console.log("check response upload",resUpload)
+        if(resUpload.data){
+            const newAvatar = resUpload.data.fileUploaded
+            const resUpdateAvatar= await updateUserAvatarAPI(newAvatar,dataDetail._id,dataDetail.fullName,dataDetail.phone)
+            console.log("check newAvatar",newAvatar)
+            if(resUpdateAvatar.data){
+                setIsDataDetail(false)
+                setSelectedFile(null)
+                setPreview(null)
+                await  loadAPI()
+                notification.success({
+                    message:"Update avatar",
+                    description:"Update avatar successfully!"
+                })
+            }
+            else{
+                notification.error({
+                    message:"Error upload file",
+                    description:JSON.stringify(resUpdateAvatar.message)
+                })
+            }
+        }
+        else{
+            notification.error({
+                message:"Error upload file",
+                description:JSON.stringify(resUpload.message)
+            })
+        }
     }
 
     return(
