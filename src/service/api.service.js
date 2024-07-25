@@ -12,8 +12,8 @@ const updateUserAPI=(fullName,_id,email,phone)=>{
     const data ={fullName,_id,email,phone}
     return axios.put(URL_BACKEND,data)
 }
-const fetchAllAPI=()=>{
-    const URL_BACKEND="api/v1/user"
+const fetchAllAPI=(current,pageSize)=>{
+    const URL_BACKEND=`api/v1/user?current=${current}&pageSize=${pageSize}`
     return axios.get(URL_BACKEND)   //Đối với method GET chỉ cần truyền URL
 }
 
@@ -40,6 +40,14 @@ const updateUserAvatarAPI=(avatar,_id,fullName,phone)=>{
     const data ={avatar,_id, fullName,phone}
     return axios.put(URL_BACKEND,data)
 }
+
+const signUpUserAPI=(fullName,email,password,phone)=>{
+    const URL_BACKEND="api/v1/user/register"
+    const data ={fullName,email,password,phone}
+    return axios.post(URL_BACKEND,data) //kê't quả của function là axios.post(URL backend, data)
+    // cấu trúc tạo mới dữ liê axios.post(URL backend, data)
+}
+
 export {
-    createUserAPI,fetchAllAPI,updateUserAPI,deleteUserAPI,handleUploadFile,updateUserAvatarAPI
+    createUserAPI,fetchAllAPI,updateUserAPI,deleteUserAPI,handleUploadFile,updateUserAvatarAPI,signUpUserAPI
 }

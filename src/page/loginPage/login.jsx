@@ -1,6 +1,7 @@
 
 import { Button, Checkbox, Form, Input } from 'antd';
 import {  Flex } from 'antd';
+import {Link} from "react-router-dom";
 const onFinish = (values) => {
     console.log('Success:', values);
 };
@@ -86,9 +87,9 @@ const LoginPage =()=>{
                             <Button style={{marginBottom:"10px"}} type="primary"htmlType="submit" block>
                                 Log In
                             </Button>
-                            <a href="/sign-up"><Button block>
+                            <Link to="/sign-up"><Button block>
                                 Sign Up
-                            </Button></a>
+                            </Button></Link>
 
 
                         </Flex>

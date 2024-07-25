@@ -6,20 +6,38 @@ import {fetchAllAPI} from "../service/api.service.js";
 
 const Book =()=>{
     const [dataUser,setDataUser]=useState([])
-    useEffect(() => {
-        loadAPI(),[]
+    const [current,setCurrent]=useState(1)
+    const [pageSize,setPageSize]=useState(5)
+    const [total,setTotal]=useState(0)
 
-    }, []);
+    useEffect(() => {
+        loadAPI()
+    }, [current, pageSize]);
     const loadAPI=async()=>{
-        const res =await fetchAllAPI()
-        setDataUser(res.data)
+        const res =await fetchAllAPI(current,pageSize) // Thêm 2 biến để dựa vào chúng xác định động số phần tử
+        if(res.data){
+            setDataUser(res.data.result)
+            setCurrent(res.data.meta.current)
+            setPageSize(res.data.meta.pageSize)
+            setTotal(res.data.meta.total)
+
+        }
     }
+
+
     return (
         <div style={{margin:"50px 100px",}}>
             <BookManage loadAPI={loadAPI}/>
             <BookTable
                 loadAPI={loadAPI}
-                dataUser={dataUser}/>
+                dataUser={dataUser}
+                current={current}
+                pageSize={pageSize}
+                total={total}
+                setCurrent={setCurrent}
+                setPageSize={setPageSize}
+            />
+
         </div>
     )
 }

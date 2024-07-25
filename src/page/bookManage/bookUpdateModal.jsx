@@ -8,7 +8,7 @@ const UpdateUserModal =(props)=>{
     const [email,setEmail]=useState("")
     const [phone,setPhone]=useState("")
     const [_id,setID]=useState("")
-    console.log(">> Check data",dataUpdate)
+    // console.log(">> Check data",dataUpdate)
     useEffect(() => {
         if(dataUpdate){
             console.log(">> Check data",dataUpdate)

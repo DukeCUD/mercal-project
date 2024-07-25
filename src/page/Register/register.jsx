@@ -1,5 +1,7 @@
 import './registerPage.css';
-import { Button, Checkbox, Form, Input, Select, Space } from 'antd';
+import {Button, Checkbox, Form, Input, message, notification, Select, Space} from 'antd';
+import {signUpUserAPI} from "../../service/api.service.js";
+import {useNavigate} from "react-router-dom";
 
 const { Option } = Select;
 
@@ -20,10 +22,27 @@ const tailLayout = {
 };
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
+    const onFinish = async  (values) => {
         console.log('Success:', values);
+        const res = await signUpUserAPI(
+            values.fullName,values.email,values.password,values.phone
+        )
+        if(res.data){
+            notification.success({
+                message:"Register user",
+                description:"User created successfully!"
+            })
+            navigate("/login")
+        }
+        else {
+            notification.error({
+                message:"Register user",
+                description:JSON.stringify(res.message)
+            })
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -34,7 +53,6 @@ const SignUpPage = () => {
     const onReset = () => {
         form.resetFields();
     };
-
 
     return (
         <div className="login-content">
@@ -60,7 +78,7 @@ const SignUpPage = () => {
             >
                 <Form.Item
                     label="Full name"
-                    name="fullname"
+                    name="fullName"
                     rules={[
                         {
                             required: true,
@@ -71,71 +89,20 @@ const SignUpPage = () => {
                     <Input />
                 </Form.Item>
 
-
-
-                <Form.Item
-                    name="gender"
-                    label="Gender"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                >
-                    <Select
-                        placeholder="Select a option and change input text above"
-                        allowClear
-                    >
-                        <Option value="male">male</Option>
-                        <Option value="female">female</Option>
-                        <Option value="other">other</Option>
-                    </Select>
-                </Form.Item>
-
-                <Form.Item
-                    noStyle
-                    shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-                >
-                    {({ getFieldValue }) =>
-                        getFieldValue('gender') === 'other' ? (
-                            <Form.Item
-                                name="customizeGender"
-                                label="Customize Gender"
-                                rules={[
-                                    {
-                                        required: true,
-                                    },
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
-                        ) : null
-                    }
-                </Form.Item>
                 <Form.Item
                     label="Email"
                     name="email"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your email!',
+                            type: "email",
+                            message: "The input is not valid E-mail!",
                         },
                     ]}
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your username!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+
 
                 <Form.Item
                     label="Password"
@@ -150,8 +117,19 @@ const SignUpPage = () => {
                     <Input.Password />
                 </Form.Item>
 
-
-
+                <Form.Item
+                    label="Phone Number"
+                    name="phone"
+                    rules={[
+                        {
+                            required: true,
+                            pattern: new RegExp(/\d+/g),
+                            message: "Wrong format!"
+                        }
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
                 <Form.Item {...tailLayout}>
                     <Space>
@@ -164,6 +142,19 @@ const SignUpPage = () => {
 
                     </Space>
                 </Form.Item>
+
+                {/*Tự động điền thông tin khi click button*/}
+                {/*<Button*/}
+                {/*onClick={()=>{*/}
+                {/*    form.setFieldsValue({*/}
+                {/*        fullName:"Nguyen Hong Duc",*/}
+                {/*        email:"ducnguyen7925@gmail.com",*/}
+                {/*        password:"ducnguyen7925",*/}
+                {/*        phone:"0975731218"*/}
+                {/*    })*/}
+                {/*}}*/}
+
+                {/*>Auto </Button>*/}
             </Form>
 
             <Form.Item
@@ -172,7 +163,6 @@ const SignUpPage = () => {
                     span: 16,
                 }}
             >
-
             </Form.Item>
         </div>
     );

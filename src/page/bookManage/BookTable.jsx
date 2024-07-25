@@ -8,7 +8,7 @@ import {deleteUserAPI, updateUserAPI} from "../../service/api.service.js";
 
 
 const BookTable=(props)=>{
-    const {dataUser,loadAPI}=props
+    const {dataUser,loadAPI,current,pageSize,total ,setCurrent,setPageSize}=props
 
     const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
     const [dataUpdate,setDataUpdate]=useState(null)
@@ -45,6 +45,18 @@ const BookTable=(props)=>{
 
 
     const columns = [
+        {
+            title: 'No',
+            // dataIndex: '_id',
+            render: (_, record,index) => (
+                <>
+                    <p style={{cursor:"pointer"}}>
+                        {index+1}
+                    </p>
+                </>
+            ),
+        },
+
         {
             title: 'Name',
             dataIndex: 'fullName',
@@ -98,12 +110,37 @@ const BookTable=(props)=>{
                 </div>
             ),
         },
-
     ];
+    const onChange = (pagination, filters, sorter, extra) => {
+        // Nê'u thay đổi trang: current
+        console.log("check event", {pagination, filters, sorter, extra})
+        if(pagination&&pagination.current){
+            if(+pagination.current!==+current){
+                setCurrent(+pagination.current)
+            }
+        }
+        if(pagination && pagination.pageSize){
+            if(+pagination.pageSize!==+pageSize){
+                setPageSize(+pagination.pageSize)
+            }
+        }
+    };
+    console.log("check pageSize",pageSize)
+
     return (
         <div>
             <Table
-                columns={columns} dataSource={dataUser} rowKey={"_id"} />
+                columns={columns} dataSource={dataUser} rowKey={"_id"}
+                onChange={onChange}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                    } }
+            />
             <UpdateUserModal
                 isModalOpenUpdate={isModalOpenUpdate}
                 setIsModalOpenUpdate={setIsModalOpenUpdate}
@@ -117,8 +154,6 @@ const BookTable=(props)=>{
             setDataDetail={setIsDataDetail}
             isDetailOpen={isDetailOpen}
             setIsDataDetail={setIsDataDetail}
-                loadAPI={loadAPI}
-
             />
         </div>
     )
