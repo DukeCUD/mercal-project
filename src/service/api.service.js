@@ -48,6 +48,16 @@ const signUpUserAPI=(fullName,email,password,phone)=>{
     // cấu trúc tạo mới dữ liê axios.post(URL backend, data)
 }
 
+const logInUserAPI=(email,password)=>{
+    const URL_BACKEND="api/v1/auth/login"
+    const data ={
+        username:email,
+        password:password,
+        delay:2000
+    }
+    return axios.post(URL_BACKEND,data)
+}
+
 export {
-    createUserAPI,fetchAllAPI,updateUserAPI,deleteUserAPI,handleUploadFile,updateUserAvatarAPI,signUpUserAPI
+    createUserAPI,fetchAllAPI,updateUserAPI,deleteUserAPI,handleUploadFile,updateUserAvatarAPI,signUpUserAPI,logInUserAPI
 }

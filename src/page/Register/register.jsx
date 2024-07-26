@@ -58,6 +58,8 @@ const SignUpPage = () => {
         <div className="login-content">
             <h1 style={{ textAlign: 'center', marginBottom: '40px' }}>Sign up</h1>
             <Form
+                justify="center"
+                align="center"
                 form={form}
                 name="basic"
                 labelCol={{
@@ -92,11 +94,15 @@ const SignUpPage = () => {
                 <Form.Item
                     label="Email"
                     name="email"
+
                     rules={[
                         {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
                             required: true,
-                            type: "email",
-                            message: "The input is not valid E-mail!",
+                            message: 'Please input your E-mail!',
                         },
                     ]}
                 >

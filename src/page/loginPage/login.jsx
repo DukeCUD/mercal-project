@@ -1,18 +1,43 @@
 
-import { Button, Checkbox, Form, Input } from 'antd';
+import {Button, Checkbox, Divider, Form, Input, notification} from 'antd';
 import {  Flex } from 'antd';
-import {Link} from "react-router-dom";
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
+import {Link, useNavigate} from "react-router-dom";
+import {logInUserAPI} from "../../service/api.service.js";
+import {useState} from "react";
+
+
+
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 const LoginPage =()=>{
+    const navigate = useNavigate();
+    const [loading,setLoading]=useState(false)
+    const onFinish =async (values) => {
+        setLoading(true)
+        console.log('Success:', values);
+        const res = await logInUserAPI(values.email,values.password)
+        if(res.data){
+            notification.success({
+                message:"Login user",
+                description:"Login successful!"
+            })
+            navigate("/")
+        }
+        else{
+            notification.error({
+                message:"Login user",
+                description:JSON.stringify(res.message)
+            })
+        }
+        setLoading(false)
+    };
+    const [form] = Form.useForm();
     return (
         <div className="login-content">
             <h1 style={{textAlign:'center',marginBottom:"40px"}}>Log in</h1>
             <Form
+                form={form}
                 name="basic"
                 labelCol={{
                     span: 8,
@@ -31,12 +56,16 @@ const LoginPage =()=>{
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Username"
-                    name="username"
+                    label="Email"
+                    name="email"
                     rules={[
                         {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Please input your E-mail!',
                         },
                     ]}
                 >
@@ -55,7 +84,7 @@ const LoginPage =()=>{
                 >
                     <Input.Password/>
                 </Form.Item>
-                <a className="link-0" href="./register">Forgot password</a>
+                <Link className="link-0" href="./register">Forgot password</Link>
 
                 <Form.Item
                     name="remember"
@@ -84,14 +113,13 @@ const LoginPage =()=>{
                                 width: '100%',
                             }}
                         >
-                            <Button style={{marginBottom:"10px"}} type="primary"htmlType="submit" block>
+                            <Button
+                                loading={loading}
+                                type="primary"htmlType="submit" block>
                                 Log In
                             </Button>
-                            <Link to="/sign-up"><Button block>
-                                Sign Up
-                            </Button></Link>
-
-
+                            <Divider style={{margin:'14px'}} plain></Divider>
+                            <Divider style={{margin:"2px"}} plain>Don't have an account? <Link to="/sign-up">Sign Up</Link></Divider>
                         </Flex>
                     </div>
                 </Form.Item>
