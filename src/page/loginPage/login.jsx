@@ -3,7 +3,8 @@ import {Button, Checkbox, Divider, Form, Input, notification} from 'antd';
 import {  Flex } from 'antd';
 import {Link, useNavigate} from "react-router-dom";
 import {logInUserAPI} from "../../service/api.service.js";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {AuthContext} from "../../component/context/auth.context.jsx";
 
 
 
@@ -13,6 +14,7 @@ const onFinishFailed = (errorInfo) => {
 const LoginPage =()=>{
     const navigate = useNavigate();
     const [loading,setLoading]=useState(false)
+    const {setUser}=useContext(AuthContext)
     const onFinish =async (values) => {
         setLoading(true)
         console.log('Success:', values);
@@ -22,6 +24,8 @@ const LoginPage =()=>{
                 message:"Login user",
                 description:"Login successful!"
             })
+            localStorage.setItem("access_token",res.data.access_token)
+            setUser(res.data.user)
             navigate("/")
         }
         else{

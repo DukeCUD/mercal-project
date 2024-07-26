@@ -130,7 +130,7 @@ const SignUpPage = () => {
                         {
                             required: true,
                             pattern: new RegExp(/\d+/g),
-                            message: "Wrong format!"
+                            message: "Please enter a valid phone number format!"
                         }
                     ]}
                 >
