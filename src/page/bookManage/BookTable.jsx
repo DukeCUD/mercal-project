@@ -39,7 +39,7 @@ const BookTable=(props)=>{
                 }
             )
         }
-        console.log(">> check respon",res.data)
+        // console.log(">> check respon",res.data)
         //Truy cập vào sâu trong phần tử của data chính là các biến fullName, email,...
     }
 
@@ -113,7 +113,7 @@ const BookTable=(props)=>{
     ];
     const onChange = (pagination, filters, sorter, extra) => {
         // Nê'u thay đổi trang: current
-        console.log("check event", {pagination, filters, sorter, extra})
+        // console.log("check event", {pagination, filters, sorter, extra})
         if(pagination&&pagination.current){
             if(+pagination.current!==+current){
                 setCurrent(+pagination.current)
@@ -125,7 +125,7 @@ const BookTable=(props)=>{
             }
         }
     };
-    console.log("check pageSize",pageSize)
+    // console.log("check pageSize",pageSize)
 
     return (
         <div>

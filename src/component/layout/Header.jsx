@@ -6,75 +6,59 @@ import { NavLink, useLocation } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import {AuthContext, AuthWrapper} from "../context/auth.context.jsx";
 
-const items = [
-    {
-        label: <NavLink to="/book.manage">Books Manage</NavLink>,
-        key: 'nav1', // Add unique keys for top-level items
-    },
-    {
-        label: <NavLink to="/update">Update</NavLink>,
-        key: 'nav2', // Add unique keys for top-level items
-    },
-    {
-        label: 'Navigation Three - Submenu',
-        key: 'nav3',  // Add unique keys for top-level items
-        children: [
-            {
-                type: 'group',
-                label: 'Item 1',
-                children: [
-                    {
-                        label: 'Option 1',
-                        key: 'setting:1',
-                    },
-                    {
-                        label: 'Option 2',
-                        key: 'setting:2',
-                    },
-                ],
-            },
-            {
-                type: 'group',
-                label: 'Item 2',
-                children: [
-                    {
-                        label: 'Option 3',
-                        key: 'setting:3',
-                    },
-                    {
-                        label: 'Option 4',
-                        key: 'setting:4',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        label: "",
-        key: 'user',  // Add unique key for user item
-        icon: <UserOutlined />,
-        children: [
-            {
-                label: <NavLink to="/setting">Setting</NavLink>,
-                key: 'setting:5',
-            },
-            {
-                label: <NavLink to="/login">Log In</NavLink>,
-                key: 'setting:6',
-            },
-            {
-                label: <NavLink to="/sign-up">Sign Up</NavLink>,
-                key: 'setting:7',
-            },
-        ],
-    },
-];
 
 const Header = () => {
+
     const {user} = useContext(AuthContext);
     console.log(">>check user",user)
     const location = useLocation();
     const [current, setCurrent] = useState(null);
+
+    const items = [
+        {
+            label: <NavLink to="/book.manage">Books Manage</NavLink>,
+            key: 'nav1', // Add unique keys for top-level items
+        },
+        {
+            label: <NavLink to="/update">Update</NavLink>,
+            key: 'nav2', // Add unique keys for top-level items
+        },
+
+
+        {
+            label: "",
+            key: 'user',  // Add unique key for user item
+            icon: <UserOutlined />,
+            children: [
+                {
+                    label: <NavLink to="/setting">Setting</NavLink>,
+                    key: 'setting:5',
+                },
+                ...(!user.id?[
+                    {
+                        label: <NavLink to="/login">Log In</NavLink>,
+                        key: 'login',
+                    },
+                    {
+                        label: <NavLink to="/sign-up">Sign Up</NavLink>,
+                        key: 'signup',
+                    },
+                ]:[]),
+                ...(user.id?[
+                    {
+                        label: 'Your profile',
+                        key: 'profile',
+                    },
+                    {
+                        label: 'log out',
+                        key: 'logout    ',
+                    },
+                ]:[]),
+
+            ],
+        },
+    ];
+
 
     useEffect(() => {
         // Update the current key based on the current pathname
