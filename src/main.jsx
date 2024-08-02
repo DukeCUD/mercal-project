@@ -13,6 +13,7 @@ import Home from "./page/Home.jsx";
 import Update from "./page/update.jsx";
 import Book from "./page/book.jsx";
 import {AuthWrapper} from "./component/context/auth.context.jsx"
+import PrivateRoute from "./page/private.route.jsx";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/book.manage",
-                element: <Book/>,
+                element: (
+                    <PrivateRoute>
+                        <Book/>,
+                    </PrivateRoute>
+                )
             },
             {
                 path: "/update",
